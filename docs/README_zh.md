@@ -1,14 +1,16 @@
-<a href="https://opencollective.com/lvgl" target="_blank"><img align="left" src="https://lvgl.io/assets/images/sponsor.png" height="32px"></a>
+<a href="https://github.com/sponsors/lvgl" target="_blank"><img align="left" src="https://lvgl.io/github-assets/sponsor.png" height="32px"></a>
 
 <p align="right">
   <a href="../README.md">English</a>  |  <b>中文</b> | <a href="./README_pt_BR.md">Português do Brasil</a> | <a href="./README_jp.md">日本語</a>
 </p>
-
 <br>
 
 <p align="center">
-  <img src="https://lvgl.io/assets/images/logo_lvgl.png">
+  <img src="https://lvgl.io/github-assets/logo-colored.png" width=300px>
 </p>
+
+
+
 
   <h1 align="center">Light and Versatile Graphics Library</h1>
   <h1 align="center">轻量级通用型图形库</h1>
@@ -16,17 +18,19 @@
 <div align="center">
   <img src="https://github.com/kisvegabor/test/raw/master/smartwatch_demo.gif">
   &nbsp;
-  <img border="1px" src="https://lvgl.io/assets/images/lvgl_widgets_demo.gif">
+  <img border="1px" src="https://lvgl.io/github-assets/widgets-demo.gif">
 </div>
+
 <br>
+
 <p align="center">
 <a href="https://lvgl.io" title="Homepage of LVGL">官网 </a> |
 <a href="https://docs.lvgl.io/" title="Detailed documentation with 100+ examples">文档</a> |
 <a href="https://forum.lvgl.io" title="Get help and help others">论坛</a> |
 <a href="https://lvgl.io/demos" title="Demos running in your browser">示例</a> |
-<a href="https://lvgl.io/services" title="Graphics design, UI implementation and consulting">服务</a> |
-<a href="https://squareline.io/" title="UI Editor for LVGL">SquareLine Studio</a>
+<a href="https://lvgl.io/services" title="Graphics design, UI implementation and consulting">服务</a>
 </p>
+
 <br>
 
 [中文宣传单](./flyers/LVGL-Chinese-Flyer.pdf)
@@ -39,7 +43,7 @@
 - [如何入门](#如何入门)
 - [例程](#例程)
   - [C](#c)
-  - [Micropython](#micropython)
+  - [MicroPython](#micropython)
 - [服务](#服务)
 - [如何向社区贡献](#如何向社区贡献)
 
@@ -52,11 +56,11 @@
 * 不依赖特定的硬件平台，可以在任何显示屏上运行
 * 配置可裁剪（最低资源占用：64 kB Flash，16 kB RAM）
 * 基于UTF-8的多语种支持，例如中文、日文、韩文、阿拉伯文等
-* 可以通过[类CSS](https://docs.lvgl.io/master/overview/style.html)的方式来设计、布局图形界面（例如：[Flexbox](https://docs.lvgl.io/master/layouts/flex.html)、[Grid](https://docs.lvgl.io/master/layouts/grid.html)）
+* 可以通过[类CSS](https://docs.lvgl.io/master/overview/style.html)的方式来设计、布局图形界面（例如：[Flex](https://docs.lvgl.io/master/layouts/flex.html)、[Grid](https://docs.lvgl.io/master/layouts/grid.html)）
 * 支持操作系统、外置内存、以及硬件加速（LVGL已内建支持STM32 DMA2D、SWM341 DMA2D、NXP PXP和VGLite）
 * 即便仅有[单缓冲区(frame buffer)](https://docs.lvgl.io/master/porting/display.html)的情况下，也可保证渲染如丝般顺滑
 * 全部由C编写完成，并支持C++调用
-* 支持Micropython编程，参见：[LVGL API in Micropython](https://blog.lvgl.io/2019-02-20/micropython-bindings)
+* 支持MicroPython编程，参见：[LVGL API in MicroPython](https://blog.lvgl.io/2019-02-20/micropython-bindings)
 * 支持[模拟器](https://docs.lvgl.io/master/get-started/platforms/pc-simulator.html)仿真，可以无硬件依托进行开发
 * 丰富详实的[例程](https://github.com/lvgl/lvgl/tree/master/examples)
 * 详尽的[文档](http://docs.lvgl.io/)以及API参考手册，可线上查阅或可下载为PDF格式
@@ -147,14 +151,14 @@ LVGL也支持：
 
 更多例程请参见 [examples](https://github.com/lvgl/lvgl/tree/master/examples) 文件夹。
 
-![LVGL button with label example](https://github.com/lvgl/lvgl/raw/master/docs/misc/btn_example.png)
+![LVGL button with label example](https://github.com/kisvegabor/test/raw/master/readme_example_2.gif)
 
 ### C
 ```c
-lv_obj_t * btn = lv_btn_create(lv_scr_act());                   /*Add a button to the current screen*/
+lv_obj_t * btn = lv_button_create(lv_screen_active());          /*Add a button to the current screen*/
 lv_obj_set_pos(btn, 10, 10);                                    /*Set its position*/
 lv_obj_set_size(btn, 100, 50);                                  /*Set its size*/
-lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /*Assign a callback to the button*/
+lv_obj_add_event(btn, btn_event_cb, LV_EVENT_CLICKED, NULL);    /*Assign a callback to the button*/
 
 lv_obj_t * label = lv_label_create(btn);                        /*Add a label to the button*/
 lv_label_set_text(label, "Button");                             /*Set the labels text*/
@@ -166,17 +170,17 @@ void btn_event_cb(lv_event_t * e)
   printf("Clicked\n");
 }
 ```
-### Micropython
-更多信息请到 [Micropython官网](https://docs.lvgl.io/master/get-started/bindings/micropython.html) 查询.
+### MicroPython
+更多信息请到 [MicroPython官网](https://docs.lvgl.io/master/get-started/bindings/micropython.html) 查询.
 ```python
 def btn_event_cb(e):
   print("Clicked")
 
 # Create a Button and a Label
-btn = lv.btn(lv.scr_act())
+btn = lv.btn(lv.screen_active())
 btn.set_pos(10, 10)
 btn.set_size(100, 50)
-btn.add_event_cb(btn_event_cb, lv.EVENT.CLICKED, None)
+btn.add_event(btn_event_cb, lv.EVENT.CLICKED, None)
 
 label = lv.label(btn)
 label.set_text("Button")

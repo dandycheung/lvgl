@@ -131,3 +131,44 @@ dl.cpp.unexpanded dd {
 .expanded .lv-api-expansion-button::before {
     content: "\f0d7 \00a0";
 }
+
+.wy-nav-content{
+    padding: 1.618em 3.236em;
+    height: 100%;
+    max-width: 1920px;
+    margin: auto
+}
+
+div.body {
+    min-width: 360px;
+    max-width: 1920px;
+}
+
+.cpp-expr {
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
+  color: #e74c3c;
+  padding: 2px 5px;
+  border: 1px solid #e1e4e5;
+  font-size: 75%;
+}
+
+/* These replace colors present in `pygments.css` which is used in code highlighting.
+ * These are too dark to be readlable in DARK mode.  They include:
+ * .highlight .nf -- function names
+ * .highlight .nl -- code labels
+ * .descname  .n  -- API documentation function names
+ * The first 2 were created by lightening the `pygments.css` colors without changing their
+ * angle on the color wheel.  The added "conditional" also limits this change to
+ * DARK MODE only instead of both light and dark modes.
+ */
+html[data-theme="dark"] .highlight .nf {
+  color: #3569f5;
+}
+
+html[data-theme="dark"] .highlight .nl {
+  color: #0043e2;
+}
+
+html[data-theme="dark"] .descname .n {
+  color: #0a44de;
+}
