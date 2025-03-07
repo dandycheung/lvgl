@@ -1,26 +1,32 @@
+<a href="https://github.com/sponsors/lvgl" target="_blank"><img align="left" src="https://lvgl.io/github-assets/sponsor.png" height="32px"></a>
+
+
+
 <p align="right"><a href="../README.md">English</a> | <a href="./README_zh.md">中文</a> | <a href="./README_pt_BR.md">Português do Brasil</a> | <b>日本語</b></p>
 
-  <br>
 <p align="center">
-  <img src="https://lvgl.io/assets/images/logo_lvgl.png">
+  <img src="https://lvgl.io/github-assets/logo-colored.png" width=300px>
 </p>
+
 
   <h1 align="center">Light and Versatile Graphics Library</h1>
   <br>
 <div align="center">
   <img src="https://github.com/kisvegabor/test/raw/master/smartwatch_demo.gif">
   &nbsp;
-  <img border="1px" src="https://lvgl.io/assets/images/lvgl_widgets_demo.gif">
+  <img border="1px" src="https://lvgl.io/github-assets/widgets-demo.gif">
 </div>
+
 <br>
+
 <p align="center">
 <a href="https://lvgl-io.translate.goog/?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja" title="Homepage of LVGL">Website </a></a> |
 <a href="https://docs-lvgl-io.translate.goog/master/index.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja" title="Detailed documentation with 100+ examples">Docs</a> |
 <a href="https://forum.lvgl.io" title="Get help and help others">Forum</a> :gb: |
 <a href="https://lvgl-io.translate.goog/demos?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja" title="Demos running in your browser">Demos</a> |
-<a href="https://lvgl-io.translate.goog/services?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja" title="Graphics design, UI implementation and consulting">Services</a> |
-<a href="https://squareline.io/" title="UI Editor for LVGL">SquareLine Studio</a> :gb:
+<a href="https://lvgl-io.translate.goog/services?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja" title="Graphics design, UI implementation and consulting">Services</a>
 </p>
+
 <br>
 
 ## :ledger: Overview
@@ -64,7 +70,7 @@ LVGL LLC では、グラフィックデザイン、UI実装、コンサルティ
   - [マルチディスプレイ](https://docs-lvgl-io.translate.goog/master/overview/display.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) 対応。
 
 **Binding と Build をサポート**
-  - [Micropython Binding](https://blog-lvgl-io.translate.goog/2019-02-20/micropython-bindings?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) が LVGL API を公開。
+  - [MicroPython Binding](https://blog-lvgl-io.translate.goog/2019-02-20/micropython-bindings?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) が LVGL API を公開。
   - カスタムビルドシステムは使用せず、プロジェクトの他のファイルをビルドするときに、LVGLをビルド可能。
   - Make と [CMake](https://docs-lvgl-io.translate.goog/master/get-started/platforms/cmake.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) が含まれており、すぐ使えるようにサポート。
   - [PCのシミュレータで開発したUIコード](https://docs-lvgl-io.translate.goog/master/get-started/platforms/pc-simulator.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) は、そのまま組込み用ハードウェアでも使用可能。
@@ -97,16 +103,16 @@ C と MicroPython のコードを選べます。
 
 ### Button with Click Event
 
-![ラベル付きボタンのLVGLサンプルプログラム](https://github.com/kisvegabor/test/raw/master/readme_example_1.gif)
+![ラベル付きボタンのLVGLサンプルプログラム](https://github.com/kisvegabor/test/raw/master/readme_example_2.gif)
 
 <details>
   <summary>C code</summary>
 
 ```c
-lv_obj_t * btn = lv_btn_create(lv_scr_act());                   /*Add a button to the current screen*/
+lv_obj_t * btn = lv_button_create(lv_screen_active());          /*Add a button to the current screen*/
 lv_obj_center(btn);                                             /*Set its position*/
 lv_obj_set_size(btn, 100, 50);                                  /*Set its size*/
-lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /*Assign a callback to the button*/
+lv_obj_add_event(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /*Assign a callback to the button*/
 
 lv_obj_t * label = lv_label_create(btn);                        /*Add a label to the button*/
 lv_label_set_text(label, "Button");                             /*Set the labels text*/
@@ -128,10 +134,10 @@ def btn_event_cb(e):
   print("Clicked")
 
 # Create a Button and a Label
-btn = lv.btn(lv.scr_act())
+btn = lv.btn(lv.screen_active())
 btn.center()
 btn.set_size(100, 50)
-btn.add_event_cb(btn_event_cb, lv.EVENT.CLICKED, None)
+btn.add_event(btn_event_cb, lv.EVENT.CLICKED, None)
 
 label = lv.label(btn)
 label.set_text("Button")
@@ -141,35 +147,35 @@ label.center()
 <br>
 
 ### Checkboxes with Layout
-![Checkboxes with layout in LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_2.gif)
+![Checkboxes with layout in LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_3.gif)
 
 <details>
   <summary>C code</summary>
 
 ```c
 
-lv_obj_set_flex_flow(lv_scr_act(), LV_FLEX_FLOW_COLUMN);
-lv_obj_set_flex_align(lv_scr_act(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
+lv_obj_set_flex_flow(lv_screen_active(), LV_FLEX_FLOW_COLUMN);
+lv_obj_set_flex_align(lv_screen_active(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
 
 lv_obj_t * cb;
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_checkbox_set_text(cb, "Apple");
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_checkbox_set_text(cb, "Banana");
 lv_obj_add_state(cb, LV_STATE_CHECKED);
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_checkbox_set_text(cb, "Lemon");
 lv_obj_add_state(cb, LV_STATE_DISABLED);
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_obj_add_state(cb, LV_STATE_CHECKED | LV_STATE_DISABLED);
 lv_checkbox_set_text(cb, "Melon\nand a new line");
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 ```
 
 </details>
@@ -180,7 +186,7 @@ lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
 ```python
 def event_handler(e):
     code = e.get_code()
-    obj = e.get_target()
+    obj = e.get_target_obj()
     if code == lv.EVENT.VALUE_CHANGED:
         txt = obj.get_text()
         if obj.get_state() & lv.STATE.CHECKED:
@@ -193,38 +199,38 @@ def event_handler(e):
 lv.scr_act().set_flex_flow(lv.FLEX_FLOW.COLUMN)
 lv.scr_act().set_flex_align(lv.FLEX_ALIGN.CENTER, lv.FLEX_ALIGN.START, lv.FLEX_ALIGN.CENTER)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.set_text("Apple")
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.set_text("Banana")
 cb.add_state(lv.STATE.CHECKED)
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.set_text("Lemon")
 cb.add_state(lv.STATE.DISABLED)
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.add_state(lv.STATE.CHECKED | lv.STATE.DISABLED)
 cb.set_text("Melon")
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 ```
 
 </details>
 <br>
 
 ### Styling a Slider
-![Styling a slider with LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_3.gif)
+![Styling a slider with LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_4.gif)
 
 
 <details>
   <summary>C code</summary>
 
 ```c
-lv_obj_t * slider = lv_slider_create(lv_scr_act());
+lv_obj_t * slider = lv_slider_create(lv_screen_active());
 lv_slider_set_value(slider, 70, LV_ANIM_OFF);
 lv_obj_set_size(slider, 300, 20);
 lv_obj_center(slider);
@@ -268,7 +274,7 @@ lv_obj_set_style_shadow_spread(slider, 2, LV_PART_KNOB);
 
 ```python
 # Create a slider and add the style
-slider = lv.slider(lv.scr_act())
+slider = lv.slider(lv.screen_active())
 slider.set_value(70, lv.ANIM.OFF)
 slider.set_size(300, 20)
 slider.center()
@@ -311,20 +317,20 @@ slider.set_style_shadow_spread(2, lv.PART.KNOB)
   <summary>C code</summary>
 
 ```c
-lv_obj_t * ltr_label = lv_label_create(lv_scr_act());
+lv_obj_t * ltr_label = lv_label_create(lv_screen_active());
 lv_label_set_text(ltr_label, "In modern terminology, a microcontroller is similar to a system on a chip (SoC).");
 lv_obj_set_style_text_font(ltr_label, &lv_font_montserrat_16, 0);
 lv_obj_set_width(ltr_label, 310);
 lv_obj_align(ltr_label, LV_ALIGN_TOP_LEFT, 5, 5);
 
-lv_obj_t * rtl_label = lv_label_create(lv_scr_act());
+lv_obj_t * rtl_label = lv_label_create(lv_screen_active());
 lv_label_set_text(rtl_label,"מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).");
 lv_obj_set_style_base_dir(rtl_label, LV_BASE_DIR_RTL, 0);
 lv_obj_set_style_text_font(rtl_label, &lv_font_dejavu_16_persian_hebrew, 0);
 lv_obj_set_width(rtl_label, 310);
 lv_obj_align(rtl_label, LV_ALIGN_LEFT_MID, 5, 0);
 
-lv_obj_t * cz_label = lv_label_create(lv_scr_act());
+lv_obj_t * cz_label = lv_label_create(lv_screen_active());
 lv_label_set_text(cz_label,
                   "嵌入式系统（Embedded System），\n是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。");
 lv_obj_set_style_text_font(cz_label, &lv_font_simsun_16_cjk, 0);
@@ -338,14 +344,14 @@ lv_obj_align(cz_label, LV_ALIGN_BOTTOM_LEFT, 5, -5);
   <summary>MicroPython code | <a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/header.py&script=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/widgets/slider/lv_example_slider_2.py&script_direct=18bb38200a64e10ead1aa17a65c977fc18131842" target="_blank">Online Simulator</a> :gb:</summary>
 
 ```python
-ltr_label = lv.label(lv.scr_act())
+ltr_label = lv.label(lv.screen_active())
 ltr_label.set_text("In modern terminology, a microcontroller is similar to a system on a chip (SoC).")
 ltr_label.set_style_text_font(lv.font_montserrat_16, 0);
 
 ltr_label.set_width(310)
 ltr_label.align(lv.ALIGN.TOP_LEFT, 5, 5)
 
-rtl_label = lv.label(lv.scr_act())
+rtl_label = lv.label(lv.screen_active())
 rtl_label.set_text("מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).")
 rtl_label.set_style_base_dir(lv.BASE_DIR.RTL, 0)
 rtl_label.set_style_text_font(lv.font_dejavu_16_persian_hebrew, 0)
@@ -354,7 +360,7 @@ rtl_label.align(lv.ALIGN.LEFT_MID, 5, 0)
 
 font_simsun_16_cjk = lv.font_load("S:../../assets/font/lv_font_simsun_16_cjk.fnt")
 
-cz_label = lv.label(lv.scr_act())
+cz_label = lv.label(lv.screen_active())
 cz_label.set_style_text_font(font_simsun_16_cjk, 0)
 cz_label.set_text("嵌入式系统（Embedded System），\n是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。")
 cz_label.set_width(310)
@@ -404,7 +410,7 @@ LVGLにない機能やウィジェットは、私たちが実装しますので�
 - **Board certification** development board または production ready kit を提供している企業に対しては、ボードがLVGLを実行できるようにするためのボード認定を行います。
 
 
-サンプルは [Demos](https://lvgl-io.translate.goog/demos?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) をご覧ください。 
+サンプルは [Demos](https://lvgl-io.translate.goog/demos?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) をご覧ください。
 詳しくは [Services page](https://lvgl-io.translate.goog/services?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=ja) をご覧ください。
 
 お問い合わせは [問い合わせフォーム](https://lvgl.io/#contact) :gb: より送信して下さい。
@@ -427,4 +433,4 @@ LVGLはオープンプロジェクトであり、協力は大歓迎です。
   <img src="https://contrib.rocks/image?repo=lvgl/lvgl&max=48" />
 </a>
 
-... and many other.
+... and many others.

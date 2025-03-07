@@ -3,7 +3,7 @@ A última versão estável está disponível na branch [release/v8.3](https://gi
 
 ---
 
-<a href="https://opencollective.com/lvgl" target="_blank"><img align="left" src="https://lvgl.io/assets/images/sponsor.png" height="32px"></a>
+<a href="https://github.com/sponsors/lvgl" target="_blank"><img align="left" src="https://lvgl.io/github-assets/sponsor.png" height="32px"></a>
 
 <p align="right">
   <a href="../README.md">English</a> |
@@ -11,27 +11,31 @@ A última versão estável está disponível na branch [release/v8.3](https://gi
   <b>Português do Brasil</b> |
   <a href="./README_jp.md">日本語</a>
 </p>
-
 <p align="center">
-  <img src="https://lvgl.io/assets/images/logo_lvgl.png">
+  <img src="https://lvgl.io/github-assets/logo-colored.png" width=300px>
 </p>
+
+
+
 
   <h1 align="center">LVGL - Biblioteca gráfica leve e versátil</h1>
   <br>
 <div align="center">
   <img src="https://github.com/kisvegabor/test/raw/master/smartwatch_demo.gif">
   &nbsp;
-  <img border="1px" src="https://lvgl.io/assets/images/lvgl_widgets_demo.gif">
+  <img border="1px" src="https://lvgl.io/github-assets/widgets-demo.gif">
 </div>
+
 <br>
+
 <p align="center">
   <a href="https://lvgl.io" title="Página inicial do LVGL">Site</a> |
   <a href="https://docs.lvgl.io/" title="Documentação detalhada com +100 exemplos">Documentação</a> |
   <a href="https://forum.lvgl.io" title="Obtenha ajuda e ajude outras pessoas">Fórum</a> |
   <a href="https://lvgl.io/services" title="Design gráfico, implementações e consultoria de serviços">Serviços</a> |
-  <a href="https://lvgl.io/demos" title="Execute demonstrações no seu navegador">Demonstrações</a> |
-  <a href="https://squareline.io/" title="Editor web para LVGL">Editor SquareLine Studio</a>
+  <a href="https://lvgl.io/demos" title="Execute demonstrações no seu navegador">Demonstrações</a>
 </p>
+
 <br>
 
 ## :monocle_face: Visão Geral
@@ -129,16 +133,16 @@ Veja como criar um botão com um evento de clique em C e MicroPython. Para mais 
 
 ### Botão com evento de clique
 
-![Botão LVGL com exemplo de rótulo (label)](https://github.com/kisvegabor/test/raw/master/readme_example_1.gif)
+![Botão LVGL com exemplo de rótulo (label)](https://github.com/kisvegabor/test/raw/master/readme_example_2.gif)
 
 <details>
   <summary>Código C</summary>
 
 ```c
-lv_obj_t * btn = lv_btn_create(lv_scr_act());                   /* Adiciona o botão a tela atual */
+lv_obj_t * btn = lv_button_create(lv_screen_active());          /* Adiciona o botão a tela atual */
 lv_obj_center(btn);                                             /* Define a posição do botão */
 lv_obj_set_size(btn, 100, 50);                                  /* Define o tamanho do botão */
-lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /* Atribui um retorno de chamada (callback) ao botão */
+lv_obj_add_event(btn, btn_event_cb, LV_EVENT_CLICKED, NULL);    /* Atribui um retorno de chamada (callback) ao botão */
 
 lv_obj_t * label = lv_label_create(btn);                        /* Adiciona um rótulo (label) */
 lv_label_set_text(label, "Botão");                              /* Define um texto para o rótulo (label) */
@@ -160,10 +164,10 @@ def btn_event_cb(e):
   print("Clicado")
 
 # Cria um botão e um rótulo (label)
-btn = lv.btn(lv.scr_act())
+btn = lv.btn(lv.screen_active())
 btn.center()
 btn.set_size(100, 50)
-btn.add_event_cb(btn_event_cb, lv.EVENT.CLICKED, None)
+btn.add_event(btn_event_cb, lv.EVENT.CLICKED, None)
 
 label = lv.label(btn)
 label.set_text("Botão")
@@ -173,35 +177,35 @@ label.center()
 <br>
 
 ### Caixas de seleção (chackboxes) com layout
-![Caixas de seleção (chackboxes) com layout no LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_2.gif)
+![Caixas de seleção (chackboxes) com layout no LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_3.gif)
 
 <details>
   <summary>Código em C</summary>
 
 ```c
 
-lv_obj_set_flex_flow(lv_scr_act(), LV_FLEX_FLOW_COLUMN);
-lv_obj_set_flex_align(lv_scr_act(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
+lv_obj_set_flex_flow(lv_screen_active(), LV_FLEX_FLOW_COLUMN);
+lv_obj_set_flex_align(lv_screen_active(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
 
 lv_obj_t * cb;
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_checkbox_set_text(cb, "Maça");
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_checkbox_set_text(cb, "Banana");
 lv_obj_add_state(cb, LV_STATE_CHECKED);
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_checkbox_set_text(cb, "Limão");
 lv_obj_add_state(cb, LV_STATE_DISABLED);
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-cb = lv_checkbox_create(lv_scr_act());
+cb = lv_checkbox_create(lv_screen_active());
 lv_obj_add_state(cb, LV_STATE_CHECKED | LV_STATE_DISABLED);
 lv_checkbox_set_text(cb, "Melão\ne uma nova linha");
-lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
+lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 ```
 </details>
 
@@ -211,7 +215,7 @@ lv_obj_add_event_cb(cb, event_handler, LV_EVENT_ALL, NULL);
 ```python
 def event_handler(e):
     code = e.get_code()
-    obj = e.get_target()
+    obj = e.get_target_obj()
     if code == lv.EVENT.VALUE_CHANGED:
         txt = obj.get_text()
         if obj.get_state() & lv.STATE.CHECKED:
@@ -224,38 +228,38 @@ def event_handler(e):
 lv.scr_act().set_flex_flow(lv.FLEX_FLOW.COLUMN)
 lv.scr_act().set_flex_align(lv.FLEX_ALIGN.CENTER, lv.FLEX_ALIGN.START, lv.FLEX_ALIGN.CENTER)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.set_text("Maça")
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.set_text("Banana")
 cb.add_state(lv.STATE.CHECKED)
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.set_text("Limão")
 cb.add_state(lv.STATE.DISABLED)
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 
-cb = lv.checkbox(lv.scr_act())
+cb = lv.checkbox(lv.screen_active())
 cb.add_state(lv.STATE.CHECKED | lv.STATE.DISABLED)
 cb.set_text("Melão")
-cb.add_event_cb(event_handler, lv.EVENT.ALL, None)
+cb.add_event(event_handler, lv.EVENT.ALL, None)
 ```
 
 </details>
 <br>
 
 ### Estilizando um controle deslizante (slider)
-![Estilizando um controle deslizante (slider) com LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_3.gif)
+![Estilizando um controle deslizante (slider) com LVGL](https://github.com/kisvegabor/test/raw/master/readme_example_4.gif)
 
 
 <details>
   <summary>Código C</summary>
 
 ```c
-lv_obj_t * slider = lv_slider_create(lv_scr_act());
+lv_obj_t * slider = lv_slider_create(lv_screen_active());
 lv_slider_set_value(slider, 70, LV_ANIM_OFF);
 lv_obj_set_size(slider, 300, 20);
 lv_obj_center(slider);
@@ -299,7 +303,7 @@ lv_obj_set_style_shadow_spread(slider, 2, LV_PART_KNOB);
 
 ```python
 # Crie um controle deslizante (slider) e adicione o estilo
-slider = lv.slider(lv.scr_act())
+slider = lv.slider(lv.screen_active())
 slider.set_value(70, lv.ANIM.OFF)
 slider.set_size(300, 20)
 slider.center()
@@ -343,20 +347,20 @@ slider.set_style_shadow_spread(2, lv.PART.KNOB)
   <summary>Código C</summary>
 
 ```c
-lv_obj_t * ltr_label = lv_label_create(lv_scr_act());
+lv_obj_t * ltr_label = lv_label_create(lv_screen_active());
 lv_label_set_text(ltr_label, "In modern terminology, a microcontroller is similar to a system on a chip (SoC).");
 lv_obj_set_style_text_font(ltr_label, &lv_font_montserrat_16, 0);
 lv_obj_set_width(ltr_label, 310);
 lv_obj_align(ltr_label, LV_ALIGN_TOP_LEFT, 5, 5);
 
-lv_obj_t * rtl_label = lv_label_create(lv_scr_act());
+lv_obj_t * rtl_label = lv_label_create(lv_screen_active());
 lv_label_set_text(rtl_label,"מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).");
 lv_obj_set_style_base_dir(rtl_label, LV_BASE_DIR_RTL, 0);
 lv_obj_set_style_text_font(rtl_label, &lv_font_dejavu_16_persian_hebrew, 0);
 lv_obj_set_width(rtl_label, 310);
 lv_obj_align(rtl_label, LV_ALIGN_LEFT_MID, 5, 0);
 
-lv_obj_t * cz_label = lv_label_create(lv_scr_act());
+lv_obj_t * cz_label = lv_label_create(lv_screen_active());
 lv_label_set_text(cz_label,
                   "嵌入式系统（Embedded System），\n是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。");
 lv_obj_set_style_text_font(cz_label, &lv_font_simsun_16_cjk, 0);
@@ -370,14 +374,14 @@ lv_obj_align(cz_label, LV_ALIGN_BOTTOM_LEFT, 5, -5);
   <summary>Código MicroPython | <a href="https://sim.lvgl.io/v8.3/micropython/ports/javascript/index.html?script_startup=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/header.py&script=https://raw.githubusercontent.com/lvgl/lvgl/0d9ab4ee0e591aad1970e3c9164fd7c544ecce70/examples/widgets/slider/lv_example_slider_2.py&script_direct=18bb38200a64e10ead1aa17a65c977fc18131842" target="_blank">Simulador online</a></summary>
 
 ```python
-ltr_label = lv.label(lv.scr_act())
+ltr_label = lv.label(lv.screen_active())
 ltr_label.set_text("In modern terminology, a microcontroller is similar to a system on a chip (SoC).")
 ltr_label.set_style_text_font(lv.font_montserrat_16, 0);
 
 ltr_label.set_width(310)
 ltr_label.align(lv.ALIGN.TOP_LEFT, 5, 5)
 
-rtl_label = lv.label(lv.scr_act())
+rtl_label = lv.label(lv.screen_active())
 rtl_label.set_text("מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).")
 rtl_label.set_style_base_dir(lv.BASE_DIR.RTL, 0)
 rtl_label.set_style_text_font(lv.font_dejavu_16_persian_hebrew, 0)
@@ -386,7 +390,7 @@ rtl_label.align(lv.ALIGN.LEFT_MID, 5, 0)
 
 font_simsun_16_cjk = lv.font_load("S:../../assets/font/lv_font_simsun_16_cjk.fnt")
 
-cz_label = lv.label(lv.scr_act())
+cz_label = lv.label(lv.screen_active())
 cz_label.set_style_text_font(font_simsun_16_cjk, 0)
 cz_label.set_text("嵌入式系统（Embedded System），\n是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。")
 cz_label.set_width(310)
